@@ -30,6 +30,30 @@ p {
   font-size: 1.5rem;
 }
 
+.table-responsive {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  margin: 5% 10%;
+}
+
+table,
+th,
+td {
+  border: 1px solid;
+}
+.table {
+  width: 80%;
+  margin: auto;
+  border-collapse: collapse;
+}
+
 .buttons {
   display: flex;
+  margin: auto;
+  justify-content: center;
+}
+
+.buttons button {
+  padding: 0% 0.5%;
 }

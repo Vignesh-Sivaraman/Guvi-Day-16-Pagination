@@ -559,8 +559,8 @@ function createButtons(name) {
 
 const pages = ["First", "Previous"];
 for (let i = 1; i <= 10; i++) pages.push(i);
-pages.push("next");
-pages.push("last");
+pages.push("Next");
+pages.push("Last");
 for (let buttons of pages) {
   buttons = createButtons(buttons);
   buttonBox.append(buttons);
@@ -571,39 +571,67 @@ const btngroup = document.getElementsByName("pageButtons");
 let currentPage = 1;
 for (let buttons of btngroup) {
   buttons.addEventListener("click", () => {
-    console.log(buttons.id);
+    // console.log(buttons.id);
     let pageNumber;
     tableDiv.innerHTML = ``;
-    if (buttons.id === "first") {
-      pageNumber = 1;
-      currentPage = 1;
+    switch (buttons.id) {
+      case "First":
+        pageNumber = 1;
+        currentPage = 1;
+        break;
+      case "Last":
+        pageNumber = 10;
+        currentPage = 10;
+        break;
+      case "Previous":
+        if (currentPage > 1) {
+          pageNumber = currentPage - 1;
+          currentPage = currentPage - 1;
+        } else {
+          pageNumber = currentPage;
+        }
+        break;
+      case "Next":
+        if (currentPage < 10) {
+          pageNumber = currentPage + 1;
+          currentPage = currentPage + 1;
+        } else {
+          pageNumber = currentPage;
+        }
+        break;
+      default:
+        currentPage = parseInt(buttons.id);
+        pageNumber = currentPage;
     }
-    if (buttons.id === "last") {
-      pageNumber = 10;
-      currentPage = 10;
-    }
-    if (buttons.id === "previous" && currentPage > 1) {
-      pageNumber = currentPage - 1;
-      currentPage = currentPage - 1;
-    } else {
-      pageNumber = currentPage;
-    }
-    if (buttons.id === "next" && pageNumber < 10) {
-      pageNumber = currentPage + 1;
-      currentPage = currentPage + 1;
-    } else {
-      pageNumber = currentPage;
-    }
-    if (
-      buttons.id !== "next" &&
-      buttons.id !== "previous" &&
-      buttons.id !== "last" &&
-      buttons.id !== "first"
-    ) {
-      currentPage = parseInt(buttons.id);
-      pageNumber = currentPage;
-    }
-    console.log(currentPage);
+    // tableDiv.innerHTML = ``;
+    // if (buttons.id === "First") {
+    //   pageNumber = 1;
+    //   currentPage = 1;
+    // }
+    // if (buttons.id === "Last") {
+    //   pageNumber = 10;
+    //   currentPage = 10;
+    // }
+    // if (buttons.id === "Previous" && currentPage > 1) {
+    //   pageNumber = currentPage - 1;
+    //   currentPage = currentPage - 1;
+    // } else {
+    //   pageNumber = currentPage;
+    // }
+    // if (buttons.id === "Next" && pageNumber < 10) {
+    //   pageNumber = currentPage + 1;
+    //   currentPage = currentPage + 1;
+    // }
+    // if (
+    //   buttons.id !== "Next" &&
+    //   buttons.id !== "Previous" &&
+    //   buttons.id !== "Last" &&
+    //   buttons.id !== "First"
+    // ) {
+    //   currentPage = parseInt(buttons.id);
+    //   pageNumber = currentPage;
+    // }
+    // console.log(currentPage);
     addItems(pageNumber);
   });
 }
